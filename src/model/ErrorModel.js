@@ -38,5 +38,14 @@ module.exports = {
   changeInfoFailInfo: {
     code: 1008,
     msg: '修改用户信息失败'
+  },
+  uploadFileSizeFailInfo: {
+    code: 1008,
+    msg: '头像上传失败'
+  },
+  // 商品表
+  goodsIsNull: {
+    code: 2001,
+    msg: '查询商品表失败'
   }
 }

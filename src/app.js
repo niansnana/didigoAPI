@@ -26,7 +26,8 @@ app.use(cors({
 }))
 
 // 接口路由
-const users = require('./routes/users')
+const users = require('./routes/users') // 用户表
+const goods = require('./routes/goods') // 商品表
 
 // error handler
 onerror(app)
@@ -37,8 +38,7 @@ app.use(async (ctx, next) => {
       ctx.status = 401
       ctx.body = {
         data: null,
-        message: 'token无效',
-        status: false
+        message: 'token无效'
       }
     } else {
       throw err
@@ -50,7 +50,7 @@ app.use(jwtKoa({
   secret: TOKEN_SECRET_KEY
 }).unless({
   // 忽略验证文件
-  path: ['/user/login', '/user/register', '/user/isExist', '/user/logout']
+  path: ['/user/login', '/user/register', '/user/isExist', '/user/logout', '/goods/list']
 }))
 
 // middlewares
@@ -71,6 +71,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(users.routes(), users.allowedMethods())
+app.use(goods.routes(), goods.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

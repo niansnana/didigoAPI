@@ -1,3 +1,8 @@
+/**
+* @author niansnana
+* @Description 用户路由
+* @UpdateTime 2020-05-19 14:43:56
+*/
 const router = require('koa-router')()
 const {
   isExist,
@@ -29,7 +34,6 @@ router.post('/register', async (ctx, next) => {
 // 修改用户信息
 router.patch('/changeInfo', async (ctx, next) => {
   const { nickName, gender, avatar, phone } = ctx.request.body
-  console.log('请求体', ctx.request.body)
   ctx.body = await changeInfo(ctx, { nickName, gender, avatar, phone })
 })
 
