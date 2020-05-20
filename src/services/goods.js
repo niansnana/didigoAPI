@@ -33,6 +33,85 @@ async function getGoodsList (sort, collectCart) {
   return GoodsData
 }
 
+/**
+ * 查询商品详情
+ * @param {Number} id 商品ID
+ */
+async function getGoodsDetail (id) {
+  const WhereOpt = {}
+  if (id) {
+    WhereOpt.id = id
+  }
+  const result = await Goods.findOne({
+    where: WhereOpt,
+    include: [
+      {
+        model: Store,
+        attributes: ['title', 'description', 'thumb', 'productScore', 'serviceScore', 'postScore']
+      }
+    ]
+  })
+  return result.dataValues
+}
+
+/**
+ * 更新商品表
+ * @param {String} collectCart 修改字段
+ * @param {String} userName 用户名
+ */
+async function updateCarts (
+  {
+    newTitle,
+    newDescription,
+    newPrice,
+    newSales,
+    newThumb,
+    newSort,
+    newStoreName,
+    newCollectCart,
+    newAddress
+  },
+  { id }
+) {
+  const updateData = {}
+  if (newTitle) {
+    updateData.title = newTitle
+  }
+  if (newDescription) {
+    updateData.description = newDescription
+  }
+  if (newPrice) {
+    updateData.price = newPrice
+  }
+  if (newSales) {
+    updateData.sales = newSales
+  }
+  if (newThumb) {
+    updateData.thumb = newThumb
+  }
+  if (newSort) {
+    updateData.sort = newSort
+  }
+  if (newStoreName) {
+    updateData.storeName = newStoreName
+  }
+  if (newCollectCart) {
+    updateData.collectCart = newCollectCart
+  }
+  if (newAddress) {
+    updateData.address = newAddress
+  }
+  const whereOpt = {
+    id
+  }
+  const result = await Goods.update(updateData, {
+    where: whereOpt
+  })
+  return result[0] > 0
+}
+
 module.exports = {
-  getGoodsList
+  getGoodsList,
+  getGoodsDetail,
+  updateCarts
 }

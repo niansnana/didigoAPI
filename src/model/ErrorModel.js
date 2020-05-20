@@ -47,5 +47,13 @@ module.exports = {
   goodsIsNull: {
     code: 2001,
     msg: '查询商品表失败'
+  },
+  cartsAddIsFail: {
+    code: 2002,
+    msg: '添加购物车失败'
+  },
+  cartsSubIsFail: {
+    code: 2003,
+    msg: '删除购物车失败'
   }
 }

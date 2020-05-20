@@ -62,7 +62,7 @@ async function updateUser ({ newPassword, newNickName, newGender, newAvatar, new
   const updateData = {}
   // 拼接需要修改的字段
   if (newPassword) {
-    updateData.password += newPassword
+    updateData.password = newPassword
   }
   if (newNickName) {
     updateData.nickName = newNickName

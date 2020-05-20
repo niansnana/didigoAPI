@@ -41,7 +41,7 @@ const Goods = seq.define('goods', {
     comment: '归属店铺'
   },
   collectCart: {
-    type: INTEGER,
+    type: STRING,
     defaultValue: 0,
     comment: '是否加入购物车'
   },
