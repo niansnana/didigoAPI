@@ -6,12 +6,14 @@
 const {
   getGoodsList,
   getGoodsDetail,
-  updateCarts
+  updateCarts,
+  searchData
 } = require('../services/goods')
 const { SuccessModel, FailModel } = require('../model/ResModel')
 const {
   goodsIsNull,
-  cartsAddIsFail
+  cartsAddIsFail,
+  searchGoodsIsNull
 } = require('../model/ErrorModel')
 
 /**
@@ -70,8 +72,22 @@ async function addCarts (ctx, { title, description, price, sales, thumb, sort, s
   return new FailModel(cartsAddIsFail)
 }
 
+/**
+ * 通过关键词搜索商品
+ * @param {String} keywords 关键词
+ */
+async function getSearchData (keywords) {
+  const result = await searchData(keywords)
+  if (result) {
+    return new SuccessModel(result)
+  } else {
+    return new FailModel(searchGoodsIsNull)
+  }
+}
+
 module.exports = {
   goodsList,
   goodsDetail,
-  addCarts
+  addCarts,
+  getSearchData
 }

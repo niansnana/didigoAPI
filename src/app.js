@@ -50,7 +50,7 @@ app.use(jwtKoa({
   secret: TOKEN_SECRET_KEY
 }).unless({
   // 忽略验证文件
-  path: ['/user/login', '/user/register', '/user/isExist', '/user/logout', '/goods/list']
+  path: ['/user/login', '/user/register', '/user/isExist', '/user/logout', '/goods/list', '/goods/detail', '/goods/search']
 }))
 
 // middlewares

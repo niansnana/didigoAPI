@@ -55,5 +55,9 @@ module.exports = {
   cartsSubIsFail: {
     code: 2003,
     msg: '删除购物车失败'
+  },
+  searchGoodsIsNull: {
+    code: 2004,
+    msg: '商品搜索为空'
   }
 }

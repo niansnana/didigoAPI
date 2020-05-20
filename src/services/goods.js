@@ -4,6 +4,8 @@
 * @UpdateTime 2020-05-19 14:50:39
 */
 const { Goods, Store } = require('../db/model/index')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 /**
  * 查询商品
  * @param {String} sort 关键词
@@ -52,6 +54,29 @@ async function getGoodsDetail (id) {
     ]
   })
   return result.dataValues
+}
+
+/**
+ * 搜索商品
+ * @param {String} keywords 关键词
+ */
+async function searchData (keywords) {
+  const result = await Goods.findAndCountAll({
+    attributes: ['title', 'description'],
+    where: {
+      title: {
+        [Op.like]: '%' + keywords + '%'
+      }
+    }
+  })
+  if (result === null) {
+    return result
+  }
+  const resultData = {
+    count: result.count,
+    data: result.rows
+  }
+  return resultData
 }
 
 /**
@@ -113,5 +138,6 @@ async function updateCarts (
 module.exports = {
   getGoodsList,
   getGoodsDetail,
-  updateCarts
+  updateCarts,
+  searchData
 }

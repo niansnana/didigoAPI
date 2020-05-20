@@ -7,7 +7,8 @@ const router = require('koa-router')()
 const {
   goodsList,
   goodsDetail,
-  addCarts
+  addCarts,
+  getSearchData
 } = require('../controller/goods')
 
 router.prefix('/goods')
@@ -24,10 +25,16 @@ router.get('/detail', async (ctx, body) => {
   ctx.body = await goodsDetail(id)
 })
 
-// 加入购物车
+// 修改商品信息
 router.patch('/update', async (ctx, next) => {
   const { title, description, price, sales, thumb, sort, storeName, collectCart, address } = ctx.request.body
   ctx.body = await addCarts(ctx, { title, description, price, sales, thumb, sort, storeName, collectCart, address })
+})
+
+// 商品搜索
+router.get('/search', async (ctx, next) => {
+  const { keywords } = ctx.request.query
+  ctx.body = await getSearchData(keywords)
 })
 
 module.exports = router
