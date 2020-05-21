@@ -62,12 +62,18 @@ async function getGoodsDetail (id) {
  */
 async function searchData (keywords) {
   const result = await Goods.findAndCountAll({
-    attributes: ['title', 'description'],
+    attributes: ['id', 'title', 'description', 'price', 'sales', 'thumb', 'address'],
     where: {
       title: {
         [Op.like]: '%' + keywords + '%'
       }
-    }
+    },
+    include: [
+      {
+        model: Store,
+        attributes: ['title']
+      }
+    ]
   })
   if (result === null) {
     return result
