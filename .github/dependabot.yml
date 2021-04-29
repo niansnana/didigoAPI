@@ -1,0 +1,25 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: sequelize
+    versions:
+    - 6.5.0
+    - 6.5.1
+    - 6.6.1
+  - dependency-name: urijs
+    versions:
+    - 1.19.5
+  - dependency-name: koa-jwt
+    versions:
+    - 4.0.0
+  - dependency-name: pug
+    versions:
+    - 3.0.0
+  - dependency-name: lodash
+    versions:
+    - 4.17.20
